@@ -50,6 +50,9 @@ def raising(self, info):
                 usr = getSecurityManager().getUser()
                 username = usr.getUserName()
                 userid = usr.getId()
+                if hasattr(request, "other") and "LANGUAGE" in request.other:
+                    language = request.other["LANGUAGE"]
+                    tb_text = tb_text + "language: %s" % language
                 try:
                     req_html = str(request)
                 except:
