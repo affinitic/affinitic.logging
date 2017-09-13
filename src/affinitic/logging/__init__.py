@@ -1,13 +1,13 @@
-import sys
-import time
-from random import random
-
 from AccessControl import getSecurityManager
+from Products.SiteErrorLog.SiteErrorLog import cleanup_lock, LOG, SiteErrorLog
+from random import random
 from zExceptions.ExceptionFormatter import format_exception
-from Products.SiteErrorLog.SiteErrorLog import SiteErrorLog
 
 
 def raising(self, info) :
+import logging
+import sys
+import time
     """Log an exception.
 
     Called by SimpleItem's exception handler.
