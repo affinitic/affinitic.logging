@@ -13,22 +13,22 @@ def raising(self, info) :
     Called by SimpleItem's exception handler.
     Returns the url to view the error log entry
     """
-    try :
+    try:
         now = time.time()
-        try :
+        try:
             tb_text = None
             tb_html = None
 
             strtype = str(getattr(info[0], '__name__', info[0]))
-            if strtype in self._ignored_exceptions :
+            if strtype in self._ignored_exceptions:
                 return
 
-            if not isinstance(info[2], basestring) :
+            if not isinstance(info[2], basestring):
                 tb_text = ''.join(
-                    format_exception(*info, **{'as_html' : 0}))
+                    format_exception(*info, **{'as_html': 0}))
                 tb_html = ''.join(
-                    format_exception(*info, **{'as_html' : 1}))
-            else :
+                    format_exception(*info, **{'as_html': 1}))
+            else:
                 tb_text = info[2]
 
             request = getattr(self, 'REQUEST', None)
@@ -36,23 +36,23 @@ def raising(self, info) :
             username = None
             userid = None
             req_html = None
-            try :
+            try:
                 strv = str(info[1])
-            except :
+            except:
                 strv = '<unprintable %s object>' % type(info[1]).__name__
-            if request :
+            if request:
                 url = request.get('URL', '?')
                 usr = getSecurityManager().getUser()
                 username = usr.getUserName()
                 userid = usr.getId()
-                try :
+                try:
                     req_html = str(request)
-                except :
+                except:
                     pass
-                if strtype == 'NotFound' :
+                if strtype == 'NotFound':
                     strv = url
                     next = request['TraversalRequestNameStack']
-                    if next :
+                    if next:
                         next = list(next)
                         next.reverse()
                         strv = '%s [ /%s ]' % (strv, '/'.join(next))
@@ -60,31 +60,30 @@ def raising(self, info) :
             log = self._getLog()
             entry_id = str(now) + str(random())  # Low chance of collision
             log.append({
-                'type' : strtype,
-                'value' : strv,
-                'time' : now,
-                'id' : entry_id,
-                'tb_text' : tb_text,
-                'tb_html' : tb_html,
-                'username' : username,
-                'userid' : userid,
-                'url' : url,
-                'req_html' : req_html,
+                'type': strtype,
+                'value': strv,
+                'time': now,
+                'id': entry_id,
+                'tb_text': tb_text,
+                'tb_html': tb_html,
+                'username': username,
+                'userid': userid,
+                'req_html': req_html,
             })
 
             cleanup_lock.acquire()
-            try :
-                if len(log) >= self.keep_entries :
+            try:
+                if len(log) >= self.keep_entries:
                     del log[:-self.keep_entries]
-            finally :
+            finally:
                 cleanup_lock.release()
-        except :
+        except:
             LOG.error('Error while logging', exc_info=sys.exc_info())
-        else :
-            if self.copy_to_zlog :
+        else:
+            if self.copy_to_zlog:
                 self._do_copy_to_zlog(now, strtype, entry_id, str(url), tb_text)
             return '%s/showEntry?id=%s' % (self.absolute_url(), entry_id)
-    finally :
+    finally:
         info = None
 
 SiteErrorLog.raising = raising
