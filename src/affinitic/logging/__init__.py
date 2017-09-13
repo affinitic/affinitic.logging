@@ -4,10 +4,15 @@ from random import random
 from zExceptions.ExceptionFormatter import format_exception
 
 
-def raising(self, info) :
 import logging
 import sys
 import time
+
+
+PACKAGENAME = "affinitic.logging"
+
+
+def raising(self, info):
     """Log an exception.
 
     Called by SimpleItem's exception handler.
@@ -87,3 +92,5 @@ import time
         info = None
 
 SiteErrorLog.raising = raising
+LOGGER = logging.getLogger(PACKAGENAME)
+LOGGER.info(">>> affinitic.logging monkey patch applied.")
