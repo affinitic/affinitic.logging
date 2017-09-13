@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import os
 
 version = '0.1.dev0'
 
@@ -32,5 +31,8 @@ setup(name='affinitic.logging',
       extras_require=dict(
           test=['unittest2'],
       ),
-      entry_points={
-'console_scripts': []})
+      entry_points="""
+      # -*- Entry points: -*-
+      [z3c.autoinclude.plugin]
+      target = plone
+      """)
