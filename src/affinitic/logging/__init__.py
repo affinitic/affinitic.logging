@@ -52,7 +52,7 @@ def raising(self, info):
                 userid = usr.getId()
                 if hasattr(request, "other") and "LANGUAGE" in request.other:
                     language = request.other["LANGUAGE"]
-                    tb_text = tb_text + "language: %s" % language
+                    tb_text = tb_text + "LANGUAGE: %s\n" % language + "HTTP REFERER: %s\n" % url
                 try:
                     req_html = str(request)
                 except:
