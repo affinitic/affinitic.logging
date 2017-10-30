@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2 (unreleased)
+0.2 (2017-10-30)
 ----------------
 
 - Fix error when trying to open an error in logbook : #10064
