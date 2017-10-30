@@ -76,6 +76,7 @@ def raising(self, info):
                 'tb_html': tb_html,
                 'username': username,
                 'userid': userid,
+                'url': url,
                 'req_html': req_html,
             })
 
