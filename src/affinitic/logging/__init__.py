@@ -23,7 +23,6 @@ def raising(self, info):
         try:
             tb_text = None
             tb_html = None
-
             strtype = str(getattr(info[0], '__name__', info[0]))
             if strtype in self._ignored_exceptions:
                 return
@@ -52,7 +51,7 @@ def raising(self, info):
                 userid = usr.getId()
                 if hasattr(request, "other") and "LANGUAGE" in request.other:
                     language = request.other["LANGUAGE"]
-                    tb_text = tb_text + "LANGUAGE: %s\n" % language + "HTTP REFERER: %s\n" % url
+                    tb_text = tb_text + ".....\n%s: %s\n.....\n" % (str(strtype), str(strv)) + "LANGUAGE: %s\n" % language + "HTTP REFERER: %s\n" % url
                 try:
                     req_html = str(request)
                 except:

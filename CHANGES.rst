@@ -4,7 +4,8 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add Exception printout for extraction in ELK : #10064
+  [nicolas]
 
 
 0.2 (2017-10-30)
