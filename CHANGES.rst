@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3 (unreleased)
+0.3 (2017-11-28)
 ----------------
 
 - Add Exception printout for extraction in ELK : #10064
